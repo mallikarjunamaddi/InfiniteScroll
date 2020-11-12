@@ -31,13 +31,22 @@ export class DataService {
       'Something bad happened; please try again later.');
   }
 
-  getImageStrings(pageIndex:number, pageSize:number): Observable<ImageString> {
+  getImageStrings(pageIndex:number, pageSize:number): Observable<ImageString[]> {
     const slug = '/GetImageStrings';
     const endPointURL = this.apiURL + slug;
     let params = new HttpParams();
     params = params.append("pageIndex", pageIndex.toString());
     params = params.append("pageSize", pageSize.toString());
-    return this.http.get<ImageString>(endPointURL, {params: params})
+    return this.http.get<ImageString[]>(endPointURL, {params: params})
+                    .pipe(catchError(this.handleError));
+  }
+
+  getImage(imageName: string): Observable<string> {
+    const slug = '/GetImage';
+    const endPointURL = this.apiURL + slug;
+    let params = new HttpParams();
+    params = params.append("imageName", imageName);
+    return this.http.get(endPointURL, {params: params, responseType: "text"})
                     .pipe(catchError(this.handleError));
   }
 }
