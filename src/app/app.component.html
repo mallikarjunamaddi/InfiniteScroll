@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <!-- Infinite Scroll Widget -->
+    <div infiniteScroll [infiniteScrollDistance]="1"
+         [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+       
+         <!-- Image Card -->
+        <div class="row mt-4">
+            <div class="card m-4 border-primary bg-light" 
+                 *ngFor="let image of imageList">
+                <div class="card-body">
+                    <img class="card-img-top" src="{{image}}" alt="No image">
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <!-- ngx-spinner -->
+    <div class="col-md-12 p2 d-flex justify-content-center">
+        <ngx-spinner
+        bdColor=""
+        size="default"
+        color="#581f87"
+        type="ball-pulse-sync"
+        [fullScreen]="false"
+        >
+        <div class="col-md-12 text-muted h6 m2 d-flex justify-content-center alert">
+            Loading please wait...!!
+        </div>
+        </ngx-spinner>
+        
+    </div>
+
+    <!-- No more data message -->
+    <div class="col-md-12 text-muted h6 p2 d-flex justify-content-center alert" 
+        *ngIf="!isDataAvailable">
+        Huh..No more images are left!!!
+    </div>
+</div>
+
+
+
+
